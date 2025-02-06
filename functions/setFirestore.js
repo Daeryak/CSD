@@ -7,7 +7,7 @@ admin.initializeApp({
     projectId: serviceAccount.project_id
 });
 
-// ✅ Firestore 객체 생성 방식 변경
+// Firestore 객체 생성 방식 변경
 const db = admin.firestore();  // 기본 Firestore 인스턴스 사용
 
 // Firestore API 엔드포인트 명시 (아시아 리전용)
@@ -17,7 +17,7 @@ db.settings({
 });
 
 // Firestore 연결 확인 로그
-console.log("✅ Firestore 연결됨! 프로젝트 ID:", admin.app().options.projectId);
+console.log(" Firestore 연결됨! 프로젝트 ID:", admin.app().options.projectId);
 
 
 /**
@@ -111,7 +111,7 @@ async function resetFirestore() {
 
         console.log("Firestore 데이터 초기화 완료!");
 
-        // 🔥 Firestore에 기본 데이터 추가 (테스트용)
+        // Firestore에 기본 데이터 추가 (테스트용)
         await seedFirestoreData();
 
     } catch (error) {
@@ -128,7 +128,7 @@ async function seedFirestoreData() {
     // Firestore Batch 생성
     const batch = db.batch();
 
-    // ✅ 기본 사용자 데이터 추가
+    // 기본 사용자 데이터 추가
     const userRef = db.collection("users").doc("testUser");
     batch.set(userRef, { 
         username: "testUser", 
@@ -137,14 +137,14 @@ async function seedFirestoreData() {
         created_at: new Date()
     });
 
-    // ✅ 감정 입력 데이터 추가
+    // 감정 입력 데이터 추가
     const entryRef = userRef.collection("entries").doc("entry1");
     batch.set(entryRef, { 
         content: "오늘은 좋은 하루였다.",
         created_at: new Date()
     });
 
-    // ✅ 감정 분석 데이터 추가
+    // 감정 분석 데이터 추가
     const analysisRef = entryRef.collection("emotion_analysis").doc("analysis1");
     batch.set(analysisRef, {
         valence: 0.8,
@@ -153,7 +153,7 @@ async function seedFirestoreData() {
         created_at: new Date()
     });
 
-    // ✅ 생성된 감정 이미지 추가
+    // 생성된 감정 이미지 추가
     const imageRef = entryRef.collection("generated_images").doc("image1");
     batch.set(imageRef, {
         image_url: "https://example.com/generated_image.jpg",
@@ -162,7 +162,7 @@ async function seedFirestoreData() {
         created_at: new Date()
     });
 
-    // ✅ 친구 관계 추가
+    // 친구 관계 추가
     const friendRef = db.collection("friendships").doc("friendship1");
     batch.set(friendRef, {
         user_id: "testUser",
@@ -173,7 +173,7 @@ async function seedFirestoreData() {
 
     // Firestore에 데이터 커밋
     await batch.commit();
-    console.log("✅ Firestore에 테스트 데이터 추가 완료!");
+    console.log(" Firestore에 테스트 데이터 추가 완료!");
 }
 
 // 실행
